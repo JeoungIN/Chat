@@ -1,9 +1,12 @@
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 
 public class ChatPanel extends JFrame {
@@ -51,6 +54,7 @@ public class ChatPanel extends JFrame {
         setContentPane(contentPane);
     }
 
+    //참가 인원, 사진 출력 수정
     private void TopPanel(){
         topPanel = new JPanel();
         topPanel.setBackground(new Color(197, 216, 226));
@@ -58,6 +62,7 @@ public class ChatPanel extends JFrame {
         contentPane.add(topPanel);
     }
 
+    //채팅 내용 출력
     private void initChatPanel(){
         chatScrollPane = new JScrollPane();
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -69,12 +74,13 @@ public class ChatPanel extends JFrame {
         chatTextPane.setFocusable(false);
         chatScrollPane.setViewportView(chatTextPane);
         chatTextPane.setBackground(new Color(204, 220, 230));
-        chatTextPane.setText("Hello, this is a chat!");
+        //chatTextPane.setText("Hello, this is a chat!");
 
         chatScrollPane.setViewportView(chatTextPane);
         contentPane.add(chatScrollPane);
     }
 
+    //전송할 메세지 입력 창
     private void TextPanel(){
         scrollPane = new JScrollPane();
         scrollPane.setBounds(0, 506, 360, 88);
@@ -84,6 +90,16 @@ public class ChatPanel extends JFrame {
         textPane = new JTextPane();
         scrollPane.setViewportView(textPane);
         scrollPane.setBackground(new Color(255,255,255));
+
+        //Enter 키 입력 시 메세지 전송
+        textPane.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (isEnter(e)) {
+                    pressEnter(textPane.getText().replaceAll("\n", ""));
+                }
+            }
+        });
     }
 
     private void sendButton(){
@@ -93,12 +109,48 @@ public class ChatPanel extends JFrame {
         contentPane.add(panel);
         panel.setLayout(null);
 
-        JButton btnNewButton = new JButton("전송");
-        btnNewButton.setFocusPainted(false);
-        btnNewButton.setBorderPainted(false);
-        btnNewButton.setBackground(new Color(235, 230, 133));
-        btnNewButton.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 11));
-        btnNewButton.setBounds(290, 8, 55, 25);
-        panel.add(btnNewButton);
+        JButton sendButton = new JButton("전송");
+        sendButton.setFocusPainted(false);
+        sendButton.setBorderPainted(false);
+        sendButton.setBackground(new Color(235, 230, 133));
+        sendButton.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 11));
+        sendButton.setBounds(290, 8, 55, 25);
+        panel.add(sendButton);
+
+        //전송 버튼 클릭 시 메세지 전송
+        sendButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                pressEnter(textPane.getText());
+            }
+        });
+    }
+
+    //메세지 전송 함수
+    private void pressEnter(String message) {
+        if(isNullString(message)) return;
+        else sendMessage(message);
+
+        textPane.setText("");
+        textPane.setCaretPosition(0);
+    }
+
+    private void sendMessage(String message) {
+        //message send 수정 필요
+        //client 입력 값 읽어서 출력
+        //받는 메세지 왼쪽, 보내는 메세지 오른쪽 출력
+        appendToChat("You: " + message);
+    }
+
+    private void appendToChat(String message) {
+        chatTextPane.setText(chatTextPane.getText() + "\n" + message);
+    }
+
+    private boolean isNullString(String message) {
+        return message == null || message.trim().isEmpty();
+    }
+
+    private boolean isEnter(KeyEvent e) {
+        return e.getKeyCode() == KeyEvent.VK_ENTER;
     }
 }

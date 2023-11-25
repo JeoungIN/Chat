@@ -39,6 +39,7 @@ public class ChatList extends JFrame {
         setContentPane(contentPane);
     }
 
+    //채팅방 목록 출력 필요
     private void initListPanel() {
         JScrollPane chatListScrollPane = new JScrollPane();
         chatListScrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -50,6 +51,7 @@ public class ChatList extends JFrame {
         chatListScrollPane.setViewportView(textPane);
     }
 
+    //친구 목록, 채팅 목록 이동 버튼 (좌측 버튼 2개)
     private void setMenu(){
         JPanel panel = new JPanel();
         panel.setBounds(0, 0, 60, 640);
@@ -79,6 +81,8 @@ public class ChatList extends JFrame {
         panel.add(chatListButton);
     }
 
+    //상단 "채팅" 출력, 채팅방 생성 버튼
+    //버튼 수정 필요
     private void setTop(){
         JPanel panel_1 = new JPanel();
         panel_1.setBackground(new Color(255, 255, 255));
@@ -103,7 +107,7 @@ public class ChatList extends JFrame {
 
         newChatButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //새로운 채팅 생성
+                JOptionPane.showMessageDialog(panel_1, "채팅방 생성", "Message",JOptionPane.PLAIN_MESSAGE );
             }
         });
     }
