@@ -107,7 +107,7 @@ public class ChatList extends JFrame {
 
         newChatButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(panel_1, "채팅방 생성", "Message",JOptionPane.PLAIN_MESSAGE );
+                JOptionPane.showMessageDialog(panel_1, "채팅방 생성", "친구 목록",JOptionPane.PLAIN_MESSAGE );
             }
         });
     }

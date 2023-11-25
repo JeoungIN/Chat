@@ -9,6 +9,8 @@ public class Profile extends JFrame {
     private JPanel contentPane;
     private JPanel panel;
 
+    private boolean mark = false;
+
     /**
      * Launch the application.
      */
@@ -71,6 +73,21 @@ public class Profile extends JFrame {
         marks.setFont(new Font("굴림", Font.PLAIN, 5));
         marks.setBounds(12, 12, 25, 25);
         panel.add(marks);
+
+        //즐겨 찾기 여부
+        marks.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(mark){
+                    mark = false;
+                    System.out.println("즐겨찾기 해제");
+                }
+                else{
+                    mark = true;
+                    System.out.println("즐겨찾기 설정");
+                }
+            }
+        });
 
         JTextPane textPane_2 = new JTextPane();
         textPane_2.setForeground(new Color(87, 87, 87));

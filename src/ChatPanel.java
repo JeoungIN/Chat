@@ -16,6 +16,7 @@ public class ChatPanel extends JFrame {
     private JScrollPane chatScrollPane;
     private JTextPane chatTextPane;
     private JScrollPane scrollPane;
+
     private JScrollPane scrollPane_1;
     private JTextPane textPane;
     private JPanel panel;
@@ -124,6 +125,8 @@ public class ChatPanel extends JFrame {
                 pressEnter(textPane.getText());
             }
         });
+
+        //이미지, 이모티콘 버튼 생성
     }
 
     //메세지 전송 함수
