@@ -196,7 +196,7 @@ public class ChatClient extends JFrame {
         return e.getKeyCode() == KeyEvent.VK_ENTER;
     }
 
-    // Thread to listen for messages from the server
+    //client to server 메시지 수신, 화면에 표시
     class ListenNetwork extends Thread {
         public void run() {
             while (true) {
